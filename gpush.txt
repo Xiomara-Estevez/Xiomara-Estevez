@@ -1,0 +1,5 @@
+git pull : pull any updates:
+git push : push work
+
+git add .
+git commit -m "Repository update"
