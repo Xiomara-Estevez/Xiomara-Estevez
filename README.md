@@ -1,7 +1,7 @@
 <h1 align="center">Hi 👋, I'm Xiomara Estevez</h1>
 <h3 align="center">A current student at Medgar Evers College (Cuny).</h3>
 
-- 🌱 I’m currently learning **Javascript, React/Vue, OOP Design, and Data Structures**
+- 🌱 I’m currently learning **Javascript, node.js, React/Vue, OOP Design, and Data Structures**
 
 - 📫 How to reach me **xiomaraestevez01@gmail.com**
 
