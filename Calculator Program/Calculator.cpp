@@ -1,5 +1,5 @@
 #include "Strategy.h"
-
+// non-user -input: Calculator operation program: MULTIPLICATION, DIVISION, ADDITION, SUBTRACTION:
 int main()
 {
     oopn::Operation* a;
