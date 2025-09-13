@@ -7,6 +7,7 @@
     },
     "files.associations": {
         "iostream": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "cmath": "cpp"
     }
 }
