@@ -9,5 +9,6 @@
         "iostream": "cpp",
         "limits": "cpp",
         "cmath": "cpp"
-    }
+    },
+    "liveServer.settings.port": 5501
 }

@@ -26,4 +26,22 @@ document.addEventListener('DOMContentLoaded', function () {
             window.location.href = 'welcome_portal.html';
         }, 200);
     }
+  
+        // Ensure the Cognito login link uses the current host as the redirect_uri so it works when deployed
+        // If an anchor with id `authLink` exists and contains a Cognito URL, replace its `redirect_uri` param
+        const authLink = document.getElementById('authLink');
+        if (authLink && authLink.href) {
+            try {
+                const url = new URL(authLink.href);
+                const params = url.searchParams;
+                if (params.has('redirect_uri')) {
+                    const newRedirect = window.location.origin + window.location.pathname.replace(/\/index\.html$/, '/') ;
+                    params.set('redirect_uri', newRedirect);
+                    url.search = params.toString();
+                    authLink.href = url.toString();
+                }
+            } catch (e) {
+                // ignore invalid URL parsing
+            }
+        }
 });
