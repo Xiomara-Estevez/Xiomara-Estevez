@@ -35,6 +35,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // Ensure the Register/Login link uses the current origin as the redirect_uri
     const authLink = document.getElementById('authLink');
     if (authLink && authLink.href) {
+        // For local development (Live Server / file://), prevent navigating to the hosted Cognito UI
+        // which will error if callback URLs are not configured. Instead simulate sign-in by
+        // redirecting directly to the welcome page.
+        authLink.addEventListener('click', function (ev) {
+            const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.protocol === 'file:';
+            if (isLocalhost) {
+                ev.preventDefault();
+                // Direct navigation to welcome_portal.html for local testing
+                window.location.href = 'welcome_portal.html';
+            }
+        });
+
         try {
             const url = new URL(authLink.href);
             const currentRedirect = url.searchParams.get('redirect_uri');
