@@ -10,20 +10,41 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Detect AWS Cognito redirect (authorization code or tokens) and forward to welcome portal.
-    // Look in both search and hash since implicit flows put tokens in the fragment.
-    const search = window.location.search || '';
-    const hash = window.location.hash ? window.location.hash.replace('#', '?') : '';
-    const params = new URLSearchParams(search + hash);
+    // Build a unified parameter set from both search and hash
+    function getAllParams() {
+        const p = new URLSearchParams();
+        const s = new URLSearchParams(window.location.search);
+        for (const [k, v] of s) p.append(k, v);
+        if (window.location.hash && window.location.hash.indexOf('=') > -1) {
+            const hash = window.location.hash.replace(/^#/, '');
+            const h = new URLSearchParams(hash);
+            for (const [k, v] of h) p.append(k, v);
+        }
+        return p;
+    }
 
+    const params = getAllParams();
     const hasAuth = params.has('code') || params.has('id_token') || params.has('access_token');
     const currentPath = window.location.pathname.split('/').pop();
 
     // Only redirect when we detect auth parameters and we're not already on the welcome page.
     if (hasAuth && currentPath !== 'welcome_portal.html') {
-        // Small delay to allow any page UI to settle
-        setTimeout(() => {
-            window.location.href = 'welcome_portal.html';
-        }, 200);
+        setTimeout(() => { window.location.href = 'welcome_portal.html'; }, 200);
+    }
+
+    // Ensure the Register/Login link uses the current origin as the redirect_uri
+    const authLink = document.getElementById('authLink');
+    if (authLink && authLink.href) {
+        try {
+            const url = new URL(authLink.href);
+            const currentRedirect = url.searchParams.get('redirect_uri');
+            const desired = window.location.origin + window.location.pathname.replace(/[^/]+$/, '') + 'welcome_portal.html';
+            if (!currentRedirect || !currentRedirect.startsWith(window.location.origin)) {
+                url.searchParams.set('redirect_uri', desired);
+                authLink.href = url.toString();
+            }
+        } catch (e) {
+            console.warn('Failed to rewrite authLink redirect_uri', e);
+        }
     }
 });
