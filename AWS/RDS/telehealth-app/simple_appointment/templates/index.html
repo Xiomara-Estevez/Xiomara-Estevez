@@ -20,6 +20,16 @@
     {% endwith %}
 
     <h2>Providers</h2>
+    <form method="get">
+      <label for="specialty">Filter by specialty:</label>
+      <select name="specialty" id="specialty" onchange="this.form.submit()">
+        <option value="">-- All specialties --</option>
+        {% for s in specialties %}
+          <option value="{{ s }}" {% if s == selected_specialty %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </form>
+
     {% for p in providers %}
       <div class="provider">
         <strong>{{ p.name }}</strong> — {{ p.specialty }}

@@ -7,9 +7,9 @@ app.secret_key = "dev-secret-key"
 
 # In-memory demo data
 PROVIDERS = [
-    {"id": "p1", "name": "Dr. Alice", "specialty": "Computer Science Tutor"},
-    {"id": "p2", "name": "Dr. Bob", "specialty": "Algorithms"},
-    {"id": "p3", "name": "Dr. Carol", "specialty": "Databases"},
+    {"id": "p1", "name": "Dr. Alice", "specialty": "Pediatrician"},
+    {"id": "p2", "name": "Dr. Bob", "specialty": "Dentist"},
+    {"id": "p3", "name": "Dr. Carol", "specialty": "Family Medicine"},
 ]
 
 # appointments: list of dicts {id, provider_id, patient_name, datetime, notes}
@@ -18,8 +18,19 @@ APPOINTMENTS = []
 @app.route("/")
 def index():
     # show providers and upcoming appointments
+    # allow filtering by specialty via ?specialty=...
+    specialty = request.args.get('specialty', '')
+
+    # compute unique specialties for the dropdown
+    specialties = sorted({p.get('specialty', '') for p in PROVIDERS if p.get('specialty')})
+
+    if specialty:
+        providers = [p for p in PROVIDERS if p.get('specialty') == specialty]
+    else:
+        providers = PROVIDERS
+
     upcoming = sorted(APPOINTMENTS, key=lambda a: a['datetime'])
-    return render_template("index.html", providers=PROVIDERS, appointments=upcoming)
+    return render_template("index.html", providers=providers, appointments=upcoming, specialties=specialties, selected_specialty=specialty)
 
 @app.route("/book/<provider_id>", methods=["GET", "POST"])
 def book(provider_id):
