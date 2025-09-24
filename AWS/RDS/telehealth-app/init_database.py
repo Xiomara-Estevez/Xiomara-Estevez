@@ -246,6 +246,11 @@ def add_sample_data():
             """
             
             user_data = user.copy()
+            # Ensure optional keys exist to avoid KeyError during formatting
+            for key in ('phone', 'date_of_birth', 'gender', 'address'):
+                if key not in user_data:
+                    user_data[key] = None
+
             user_data['password_hash'] = hash_password(user['password'])
             del user_data['password']  # Remove plain password
             
