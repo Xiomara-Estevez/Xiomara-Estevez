@@ -141,7 +141,7 @@ def health():
 
     return jsonify({
         "status": "ok",
-        "time": datetime.utcnow().isoformat() + "Z",
+        "time": datetime.now(datetime.timezone.utc).isoformat() + "Z",
         "database": db_status,
     }), 200
 
