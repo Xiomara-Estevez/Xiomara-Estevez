@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Telehealth Login</title>
+    <style>
+        body { font-family: Arial; max-width: 300px; margin: 100px auto; padding: 20px; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; }
+        button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; cursor: pointer; }
+        .result { margin: 20px 0; padding: 10px; border-radius: 4px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h2>🏥 Telehealth Login</h2>
+    <input type="text" id="username" placeholder="Username" value="testuser">
+    <input type="password" id="password" placeholder="Password" value="TestPass123!">
+    <button onclick="login()">Login</button>
+    <div id="result"></div>
+
+    <script>
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const result = document.getElementById('result');
+            
+            try {
+                const response = await fetch('https://1fjxzto6nk.execute-api.us-east-1.amazonaws.com/prod/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    result.innerHTML = `<div class="success">✅ Welcome ${data.user}!</div>`;
+                } else {
+                    result.innerHTML = `<div class="error">❌ ${data.error}</div>`;
+                }
+            } catch (error) {
+                result.innerHTML = `<div class="error">❌ Connection failed</div>`;
+            }
+        }
+    </script>
+</body>
+</html>

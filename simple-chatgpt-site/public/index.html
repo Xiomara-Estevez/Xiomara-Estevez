@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Simple ChatGPT Site</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+  <!-- decorative floating shapes in the background -->
+  <div class="bg-overlay" aria-hidden="true"></div>
+    <div class="float-bg" aria-hidden="true">
+      <div class="float x1"></div>
+      <div class="float x2"></div>
+      <div class="float x3"></div>
+      <div class="float x4"></div>
+      <div class="float x5"></div>
+    </div>
+
+    <!-- glitter particles (theme-aware) -->
+    <div class="glitter-bg" aria-hidden="true">
+      <!-- a handful of sparkles, CSS will animate them -->
+      <span class="spark" style="--x:8%; --y:12%; --s:0.6;"></span>
+      <span class="spark" style="--x:22%; --y:28%; --s:1.0;"></span>
+      <span class="spark" style="--x:36%; --y:6%; --s:0.8;"></span>
+      <span class="spark" style="--x:66%; --y:18%; --s:0.5;"></span>
+      <span class="spark" style="--x:82%; --y:42%; --s:0.7;"></span>
+      <span class="spark" style="--x:52%; --y:72%; --s:1.2;"></span>
+      <span class="spark" style="--x:12%; --y:62%; --s:0.9;"></span>
+      <span class="spark" style="--x:92%; --y:8%; --s:0.5;"></span>
+    </div>
+
+    <!-- minimal ribbon accents across the background -->
+    <div class="ribbon-bg" aria-hidden="true">
+      <div class="ribbon ribbon-1"></div>
+      <div class="ribbon ribbon-2"></div>
+    </div>
+
+    <!-- top controls: mock badge and dark mode toggle -->
+    <div class="top-controls">
+      <div id="mock-badge" class="mock-badge" hidden>MOCK MODE</div>
+      <label class="dark-toggle switch">
+        <input id="darkToggle" type="checkbox" />
+        <span class="slider" aria-hidden="true"></span>
+        <span class="toggle-label">Dark</span>
+      </label>
+      <label style="display:inline-flex;align-items:center;gap:8px;">
+        <select id="themeSelect" aria-label="Dark theme style" title="Choose dark theme style">
+          <option value="dark">Classic</option>
+          <option value="dark-crimson">Crimson</option>
+          <option value="dark-midnight">Midnight</option>
+          <option value="dark-neon">Neon</option>
+        </select>
+      </label>
+      <div class="button-presets" title="Pick Send button color">
+        <button class="preset small" data-preset="soft" aria-label="Soft"></button>
+        <button class="preset small" data-preset="medium" aria-label="Medium"></button>
+        <button class="preset small" data-preset="vibrant" aria-label="Vibrant"></button>
+      </div>
+    </div>
+
+    <main class="card">
+      <div class="title"><h1>ChatterBox</h1></div>
+      <div id="chat" class="chat"></div>
+
+      <form id="form">
+        <input id="input" placeholder="Type your message..." autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+
+      <p class="note">This is a minimal demo. Set OPENAI_API_KEY on the server before starting.</p>
+    </main>
+
+    <!-- optional neon scanline overlay (shown by CSS when neon theme is active) -->
+    <div class="neon-scanline" aria-hidden="true"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

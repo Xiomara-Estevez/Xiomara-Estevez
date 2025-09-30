@@ -2,22 +2,14 @@ import json
 from app import app
 
 def lambda_handler(event, context):
-    """AWS Lambda handler"""
+    """AWS Lambda handler for Flask app"""
     
-    # Handle API Gateway requests
     method = event.get('httpMethod', 'GET')
     path = event.get('path', '/api/health')
     body = event.get('body', '')
-    headers = event.get('headers', {})
     
-    # Use Flask test client
     with app.test_client() as client:
-        response = client.open(
-            path, 
-            method=method,
-            data=body,
-            headers=headers
-        )
+        response = client.open(path, method=method, data=body)
         
         return {
             'statusCode': response.status_code,
@@ -27,3 +19,12 @@ def lambda_handler(event, context):
                 'Access-Control-Allow-Origin': '*'
             }
         }
+
+# Test locally
+if __name__ == '__main__':
+    test_event = {
+        'httpMethod': 'GET',
+        'path': '/api/health'
+    }
+    result = lambda_handler(test_event, {})
+    print(json.dumps(result, indent=2))

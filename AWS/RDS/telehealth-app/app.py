@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from typing import Any, Dict, List, Optional
 try:
@@ -141,7 +141,7 @@ def health():
 
     return jsonify({
         "status": "ok",
-        "time": datetime.now(datetime.timezone.utc).isoformat() + "Z",
+        "time": datetime.now(timezone.utc).isoformat() + "Z",
         "database": db_status,
     }), 200
 
