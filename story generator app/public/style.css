@@ -1,0 +1,168 @@
+:root{--bg:#fff1f0;--red-canary:#c7299f;--red-deep:#8a0000;--accent:#ff6b6b;--red-button:#d95b5b;--dark:#222;--red-dark:#bf4b4b;--red-light:#ff9a9a}
+:root[data-theme='dark']{--bg:#070506;--red-canary:#ff4d4d;--red-deep:#cc0f0f;--accent:#ff7b7b;--red-button:#bf4b4b;--dark:#f2f2f2;--red-dark:#bf4b4b;--red-light:#ff9a9a}
+*{box-sizing:border-box;font-family:Segoe UI,system-ui,Arial}
+
+/* Ribbon background accents - minimal and professional */
+.ribbon-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.ribbon{position:absolute;width:140%;height:96px;left:-20%;top:40%;transform:rotate(-12deg);border-radius:6px;opacity:0.08;backdrop-filter:blur(2px);filter:blur(1px)}
+.ribbon-2{left:-30%;top:60%;transform:rotate(-10deg);height:120px;opacity:0.06}
+
+/* Theme tint for ribbons */
+:root .ribbon{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+[data-theme='dark-crimson'] .ribbon{background:linear-gradient(90deg, rgba(200,40,40,0.12), rgba(180,30,30,0.06))}
+[data-theme='dark-midnight'] .ribbon{background:linear-gradient(90deg, rgba(60,110,200,0.12), rgba(40,80,160,0.06))}
+[data-theme='dark-neon'] .ribbon{background:linear-gradient(90deg, rgba(255,30,90,0.12), rgba(200,30,80,0.06))}
+
+.bg-overlay{position:fixed;inset:0;background:linear-gradient(180deg, rgba(255,43,43,0.06), rgba(255,43,43,0.02));pointer-events:none;z-index:0}
+body{margin:0;min-height:100vh;background:linear-gradient(180deg,var(--bg),#fff)}
+.card{max-width:780px;margin:6vh auto;padding:28px;border-radius:14px;background:rgba(255,255,255,0.7);backdrop-filter:blur(6px);box-shadow:0 12px 40px rgba(0,0,0,0.12);border:1px solid rgba(255,43,43,0.08);display:flex;flex-direction:column;align-items:center;text-align:center}
+/* center and emphasize the title */
+.title{display:flex;align-items:center;gap:12px}
+h1{margin:0 0 12px;color:var(--dark);font-size:2rem;letter-spacing:0.5px}
+
+/* subtle subtitle */
+.subtitle{font-size:12px;color:rgba(0,0,0,0.5)}
+.chat{min-height:220px;border-radius:12px;padding:16px;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,240,240,0.7));border:1px solid rgba(138,0,0,0.06);overflow:auto;box-shadow:inset 0 2px 8px rgba(0,0,0,0.03)}
+.msg{padding:8px 10px;margin:8px 0;border-radius:8px;max-width:80%}
+.msg.user{background:rgba(224,59,59,0.12);color:var(--dark);margin-left:auto;text-align:right}
+.msg.bot{background:rgba(224,59,59,0.06);color:var(--dark);margin-right:auto}
+form{display:flex;gap:8px;margin-top:12px}
+input{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08)}
+button{background:var(--red-button);color:#fff;border:none;padding:10px 16px;border-radius:10px;cursor:pointer;font-weight:600;box-shadow:0 8px 20px rgba(217,91,91,0.10)}
+.note{font-size:12px;color:#666;margin-top:10px}
+
+/* Floating decorative background shapes */
+.float-bg{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.float{position:absolute;opacity:0.36;transform:translateY(0);border-radius:50%}
+.float.x1{width:280px;height:280px;background:var(--red-deep);left:-40px;top:6%;animation:floatUp 18s ease-in-out infinite;opacity:0.42;filter:drop-shadow(0 18px 36px rgba(0,0,0,0.26))}
+.float.x2{width:160px;height:160px;background:var(--red-deep);left:70%;top:2%;animation:floatUp 14s ease-in-out infinite;opacity:0.38}
+.float.x3{width:140px;height:140px;left:82%;top:56%;animation:floatUp 22s ease-in-out infinite;opacity:0.34;background:var(--red-canary)}
+.float.x4{width:220px;height:220px;left:40%;top:76%;animation:floatUp 16s ease-in-out infinite;opacity:0.36}
+.float.x5{width:100px;height:100px;background:var(--red-canary);left:8%;top:48%;animation:floatUp 20s ease-in-out infinite;opacity:0.34}
+
+@keyframes floatUp{
+	0%{transform:translateY(0) translateX(0) rotate(0deg)}
+	25%{transform:translateY(-8vh) translateX(4vw) rotate(6deg)}
+	50%{transform:translateY(0) translateX(-3vw) rotate(0deg)}
+	75%{transform:translateY(8vh) translateX(2vw) rotate(-6deg)}
+	100%{transform:translateY(0) translateX(0) rotate(0deg)}
+}
+
+/* keep content above floating shapes */
+.card{position:relative;z-index:1}
+
+/* mock badge and top controls */
+.top-controls{position:fixed;left:12px;top:12px;display:flex;gap:10px;align-items:center;z-index:2}
+.mock-badge{background:var(--red-dark);color:white;padding:6px 10px;border-radius:999px;font-weight:600;font-size:12px;box-shadow:0 6px 18px rgba(179,0,0,0.12)}
+.dark-toggle{display:inline-flex;align-items:center;gap:8px;padding:4px}
+
+/* switch style */
+.dark-toggle.switch{gap:10px}
+.dark-toggle.switch input{position:absolute;opacity:0;width:0;height:0}
+.dark-toggle .slider{width:44px;height:24px;background:rgba(0,0,0,0.08);border-radius:999px;position:relative;display:inline-block}
+.dark-toggle .slider::after{content:'';position:absolute;left:4px;top:4px;width:16px;height:16px;background:white;border-radius:50%;transition:transform 180ms ease}
+.dark-toggle.switch input:checked + .slider{background:var(--red-canary)}
+.dark-toggle.switch input:checked + .slider::after{transform:translateX(20px)}
+.dark-toggle .toggle-label{font-weight:600;color:rgba(0,0,0,0.65)}
+
+[data-theme='dark'] .dark-toggle .toggle-label{color:#efefef}
+
+/* Button preset previews */
+.button-presets{display:flex;gap:8px;align-items:center}
+.button-presets .preset{width:28px;height:28px;border-radius:8px;border:none;cursor:pointer;box-shadow:0 6px 14px rgba(0,0,0,0.08)}
+.button-presets .preset.small{width:22px;height:22px;border-radius:6px}
+.preset[data-preset="soft"]{background:#d95b5b}
+.preset[data-preset="medium"]{background:#bf4b4b}
+.preset[data-preset="vibrant"]{background:var(--red-canary)}
+
+/* adapt some colors in dark mode (matches when data-theme is set on html or body) */
+[data-theme='dark']{background:linear-gradient(180deg,#070708,#0f0f10)}
+[data-theme='dark'] .card{background:#0b0b0c;border:1px solid rgba(255,91,91,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.5)}
+[data-theme='dark'] .chat{background:linear-gradient(180deg,#0b0b0c,#0f0f10);border:1px solid rgba(255,91,91,0.04)}
+[data-theme='dark'] input{background:#111;border:1px solid rgba(255,255,255,0.04);color:var(--dark)}
+[data-theme='dark'] h1, [data-theme='dark'] .msg{color:var(--dark)}
+
+/* Ensure interactive controls remain visible in dark mode */
+[data-theme='dark'] button{
+	background:var(--red-dark) !important;
+	color:#fff !important;
+	border:none !important;
+}
+
+[data-theme='dark'] .dark-toggle{
+	background:rgba(255,255,255,0.04);
+}
+
+.dark-toggle input{
+	width:18px;height:18px;border:1px solid rgba(0,0,0,0.12);background:transparent;accent-color:var(--red-light)
+}
+
+/* Ensure the 'Dark' label and checkbox are readable in dark mode */
+[data-theme='dark'] .dark-toggle span{
+	color: #efefef;
+	font-weight:600;
+}
+
+[data-theme='dark'] .dark-toggle input{
+	border:1px solid rgba(255,255,255,0.18);
+	background:rgba(255,255,255,0.06);
+}
+
+/* Dark variant: Crimson - warmer, high-contrast red accents */
+:root[data-theme='dark-crimson']{--bg:#0b0404;--red-canary:#ff6b6b;--red-deep:#b11212;--accent:#ff8b8b;--red-button:#c03939;--dark:#f7eaea;--red-dark:#9b1a1a;--red-light:#ffb4b4}
+[data-theme='dark-crimson']{background:linear-gradient(180deg,#070202,#120202)}
+[data-theme='dark-crimson'] .card{background:rgba(18,2,2,0.7);border:1px solid rgba(255,90,90,0.06);box-shadow:0 18px 50px rgba(176,18,18,0.45);backdrop-filter:blur(4px)}
+[data-theme='dark-crimson'] .chat{background:linear-gradient(180deg,rgba(12,2,2,0.6),rgba(24,4,4,0.7));border:1px solid rgba(255,60,60,0.04)}
+[data-theme='dark-crimson'] .msg.user{background:rgba(255,80,80,0.12);color:var(--dark)}
+[data-theme='dark-crimson'] .msg.bot{background:rgba(120,20,20,0.06);color:var(--dark)}
+[data-theme='dark-crimson'] .float{opacity:0.3;filter:blur(2px)}
+
+/* Dark variant: Midnight - cool, deep blues with subtle glow */
+:root[data-theme='dark-midnight']{--bg:#07081a;--red-canary:#6fb3ff;--red-deep:#27408b;--accent:#6fb3ff;--red-button:#5078ff;--dark:#e6f0ff;--red-dark:#123256;--red-light:#9fcfff}
+[data-theme='dark-midnight']{background:linear-gradient(180deg,#020316,#07102a)}
+[data-theme='dark-midnight'] .card{background:linear-gradient(180deg,rgba(6,10,30,0.7),rgba(4,8,20,0.6));border:1px solid rgba(80,120,255,0.06);box-shadow:0 18px 50px rgba(10,20,60,0.6);backdrop-filter:blur(6px)}
+[data-theme='dark-midnight'] h1{color:var(--red-canary)}
+[data-theme='dark-midnight'] .chat{background:linear-gradient(180deg,rgba(8,12,32,0.6),rgba(6,10,28,0.7));border:1px solid rgba(80,120,255,0.02)}
+[data-theme='dark-midnight'] .msg.user{background:rgba(80,120,255,0.08);color:var(--dark)}
+[data-theme='dark-midnight'] .msg.bot{background:rgba(110,160,255,0.03);color:var(--dark)}
+[data-theme='dark-midnight'] .float{mix-blend-mode:screen;opacity:0.22;filter:blur(1px);transform:translateZ(0)}
+
+/* Dark variant: Neon - saturated, playful neon reds and subtle scanline effect */
+:root[data-theme='dark-neon']{--bg:#040006;--red-canary:#ff2b6d;--red-deep:#ff0055;--accent:#ff6b9a;--red-button:#ff3b6b;--dark:#fff0f6;--red-dark:#ff245e;--red-light:#ff9ac0}
+[data-theme='dark-neon']{background:radial-gradient(ellipse at center,#0a0011 0%,#020003 60%)}
+[data-theme='dark-neon'] .card{background:linear-gradient(180deg,rgba(6,0,12,0.65),rgba(4,0,8,0.5));border:1px solid rgba(255,60,110,0.06);box-shadow:0 24px 60px rgba(255,30,90,0.12);backdrop-filter:blur(2px)}
+[data-theme='dark-neon'] .chat{background:linear-gradient(180deg,rgba(6,0,12,0.6),rgba(4,0,8,0.6));border:1px solid rgba(255,30,90,0.04)}
+[data-theme='dark-neon'] .msg.user{background:linear-gradient(90deg, rgba(255,60,120,0.12), rgba(255,20,80,0.08));color:var(--dark);box-shadow:0 6px 18px rgba(255,20,80,0.06)}
+[data-theme='dark-neon'] .msg.bot{background:rgba(255,20,80,0.04);color:var(--dark)}
+[data-theme='dark-neon'] .float{opacity:0.5;filter:drop-shadow(0 12px 30px rgba(255,40,100,0.12));mix-blend-mode:overlay}
+
+/* Small scanline overlay for neon - subtle effect */
+.neon-scanline{pointer-events:none;position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px);background-size:100% 4px}
+
+/* Glitter sparkles - subtle animated highlights that respect theme colors */
+.glitter-bg{position:fixed;inset:0;pointer-events:none;z-index:0;mix-blend-mode:screen}
+.glitter-bg .spark{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:0.0;transform:scale(0.2);box-shadow:0 0 8px rgba(255,255,255,0.6);animation:glitterPop 3.6s infinite ease-in-out;will-change:opacity,transform}
+.glitter-bg .spark::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;box-shadow:0 0 16px currentColor;opacity:0.0}
+.glitter-bg .spark:nth-child(2){animation-delay:0.4s}
+.glitter-bg .spark:nth-child(3){animation-delay:0.8s}
+.glitter-bg .spark:nth-child(4){animation-delay:1.2s}
+.glitter-bg .spark:nth-child(5){animation-delay:1.6s}
+.glitter-bg .spark:nth-child(6){animation-delay:2s}
+.glitter-bg .spark:nth-child(7){animation-delay:2.4s}
+.glitter-bg .spark:nth-child(8){animation-delay:2.8s}
+.glitter-bg .spark{left:var(--x);top:var(--y);transform:translate(-50%,-50%) scale(var(--s));}
+
+@keyframes glitterPop{
+	0%{opacity:0;transform:translate(-50%,-50%) scale(0.2)}
+	10%{opacity:0.9;transform:translate(-50%,-50%) scale(1.05)}
+	30%{opacity:0.6;transform:translate(-50%,-50%) scale(0.9)}
+	60%{opacity:0.25;transform:translate(-50%,-50%) scale(0.6)}
+	100%{opacity:0;transform:translate(-50%,-50%) scale(0.2)}
+}
+
+/* Theme-specific tinting for glitter (subtle) */
+:root .glitter-bg .spark{background:var(--accent);color:var(--accent)}
+[data-theme='dark-crimson'] .glitter-bg .spark{background:rgba(255,90,90,0.9);color:rgba(255,90,90,0.9)}
+[data-theme='dark-midnight'] .glitter-bg .spark{background:rgba(110,170,255,0.95);color:rgba(110,170,255,0.95);box-shadow:0 0 12px rgba(100,160,255,0.12)}
+[data-theme='dark-neon'] .glitter-bg .spark{background:rgba(255,60,120,0.98);color:rgba(255,60,120,0.98);box-shadow:0 0 18px rgba(255,40,100,0.18)}
+
